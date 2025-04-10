@@ -11,7 +11,10 @@ WORKDIR /home/gradle/project
 RUN chmod +x gradlew
 
 # 建構 jar（不跑測試，加快速度）
-RUN ./gradlew clean build -x test
+# Dockerfile（如果 .jar 已經存在）
+COPY build/libs/*.jar app.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
 
 # ✅ 第二階段：用更小的 JDK 映像來執行 Spring Boot 應用
 FROM openjdk:17-jdk-slim
