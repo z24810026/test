@@ -10,7 +10,7 @@ WORKDIR /home/gradle/project
 # 確保 gradlew 有執行權限
 RUN chmod +x gradlew
 
-# 建構 jar（不跑測試，加快速度）
+RUN ./gradlew build -x test
 # Dockerfile（如果 .jar 已經存在）
 COPY build/libs/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
