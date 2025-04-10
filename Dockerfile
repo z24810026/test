@@ -10,11 +10,12 @@ WORKDIR /home/gradle/project
 # 確保 gradlew 有執行權限
 RUN chmod +x gradlew
 
-RUN ./gradlew build -x test
+# 建構 .jar，並顯示詳細錯誤訊息
+RUN ./gradlew build -x test --stacktrace
+
 # Dockerfile（如果 .jar 已經存在）
 COPY build/libs/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
-
 
 # ✅ 第二階段：用更小的 JDK 映像來執行 Spring Boot 應用
 FROM openjdk:17-jdk-slim
