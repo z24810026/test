@@ -1,0 +1,11 @@
+### 測試 POST 新增一筆記錄
+POST http://localhost:8080/api/records
+Content-Type: application/json
+
+{
+  "type": "支出",
+  "category": "飲食",
+  "amount": 120,
+  "note": "午餐便當",
+  "day": "2025-04-03"
+}
